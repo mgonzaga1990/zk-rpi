@@ -3,7 +3,7 @@ set -e
 
 #Create Update zoo.cfg
 zoo_file=${ZOO_PATH}/conf/zoo.cfg
-printf "tickTime=2000\ninitLimit=10\ndataDir=${ZOO_DATA_DIR}\nclientPort=${PORT}\n" > $zoo_file
+printf "tickTime=2000\ninitLimit=10\ndataDir=${ZOO_DATA_DIR}\nclientPort=${PORT}\nmaxClientCnxns=60\nsyncLimit=5" > $zoo_file
 
 #Update server config
 cluster_file=/${ZOO_HOME}/cluster.properties
