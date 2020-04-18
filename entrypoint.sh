@@ -18,7 +18,7 @@ if [ -f "$cluster_file" ]; then
  
  #create unique id
  mkdir -p ${ZOO_DATA_DIR}
- echo "1" > ${ZOO_DATA_DIR}/myid.txt
+ echo "${ZOO_ID}" > ${ZOO_DATA_DIR}/myid.txt
  mv ${ZOO_DATA_DIR}/myid.txt ${ZOO_DATA_DIR}/myid
 else
  echo "No cluster configuration found" 
