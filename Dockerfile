@@ -12,8 +12,9 @@ ENV ZOO_VERSION=3.6.0
 ENV ZOO_HOME=zookeeper
 ENV ZOO_FOLDER=apache-zookeeper-${ZOO_VERSION}-bin
 ENV ZOO_PATH=${ZOO_HOME}/${ZOO_FOLDER}
-ENV ZOO_DATA_DIR=/${ZOO_HOME}/var
+ENV ZOO_DATA_DIR=/${ZOO_HOME}/data
 ENV PORT=2181
+ENV ZOO_ID=
 
 #Make zookeeper directory
 RUN mkdir -p ${ZOO_PATH}
@@ -23,6 +24,7 @@ RUN wget -P ${ZOO_PATH}/ https://downloads.apache.org/zookeeper/zookeeper-${ZOO_
     && tar -xvf ${ZOO_PATH}/${ZOO_FOLDER}.tar.gz -C ${ZOO_HOME} \
     && rm ${ZOO_PATH}/${ZOO_FOLDER}.tar.gz
 
+#COPY myid $ZOO_DATA_DIR
 COPY entrypoint.sh /usr/bin
 COPY cluster.proper* /${ZOO_HOME}/
 

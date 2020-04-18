@@ -15,12 +15,18 @@ if [ -f "$cluster_file" ]; then
  echo "${key} ${value}" 
   printf "server.${key}=${value}\n" >> $zoo_file
  done < "${ZOO_HOME}/cluster.properties"
+ 
+ #create unique id
+ mkdir -p ${ZOO_DATA_DIR}
+ echo "1" > ${ZOO_DATA_DIR}/myid.txt
+ mv ${ZOO_DATA_DIR}/myid.txt ${ZOO_DATA_DIR}/myid
 else
  echo "No cluster configuration found" 
 fi
 
 ./$ZOO_PATH/bin/zkServer.sh start
 
+sed -i -e "s/25/1/g" ${ZOO_DATA_DIR}/zookeeper_server.pid
 while true
 do
   sleep 100
