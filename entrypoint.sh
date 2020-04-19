@@ -3,7 +3,7 @@ set -e
 
 #Create Update zoo.cfg
 zoo_file=${ZOO_PATH}/conf/zoo.cfg
-printf "tickTime=2000\ninitLimit=10\ndataDir=${ZOO_DATA_DIR}\nclientPort=${PORT}\nmaxClientCnxns=60\nsyncLimit=5" > $zoo_file
+printf "tickTime=2000\ninitLimit=10\ndataDir=${ZOO_DATA_DIR}\nmaxClientCnxns=60\nsyncLimit=5\nclientPort=${PORT}\n" > $zoo_file
 
 #Update server config
 cluster_file=/${ZOO_HOME}/cluster.properties
@@ -24,10 +24,10 @@ else
  echo "No cluster configuration found" 
 fi
 
-./$ZOO_PATH/bin/zkServer.sh start
+./$ZOO_PATH/bin/zkServer.sh start-foreground $ZOO_PATH/conf/zoo.cfg
 
-sed -i -e "s/25/1/g" ${ZOO_DATA_DIR}/zookeeper_server.pid
-while true
-do
-  sleep 100
-done
+#sed -i -e "s/25/1/g" ${ZOO_DATA_DIR}/zookeeper_server.pid
+#while true
+#do
+#  sleep 100
+#done
